@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Palindrome Checker with Celebration</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: aqua;
+      transition: background-color 0.5s;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    
+    /* Celebrate style for body */
+    body.celebrate {
+      background-color: #e0ffe0; /* Light green background */
+      animation: celebration 2s ease-in-out;
+    }
+    @keyframes celebration {
+      0%   { background-color: #ffffff; }
+      50%  { background-color: #e0ffe0; }
+      100% { background-color: #ffffff; }
+    }
+    
+    /* Celebrate style for result text */
+    #result.celebrate {
+      color: #2e7d32;
+      font-size: 2em;
+      animation: pop 1s forwards;
+    }
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Palindrome Checker</h1>
+  <input type="text" id="inputString" placeholder="Enter a string">
+  <button id="checkBtn">Check Palindrome</button>
+  <p id="result"></p>
+
+  <script>
+    // Function to check if a string is a palindrome
+    function isPalindrome(str) {
+      // Reverse the string by splitting it into an array, reversing the array, and joining it back into a string.
+      const reversed = str.split('').reverse().join('');
+      return str === reversed;
+    }
+
+    // Event listener for the button
+    document.getElementById('checkBtn').addEventListener('click', function() {
+      const inputStr = document.getElementById('inputString').value;
+      const resultElement = document.getElementById('result');
+      
+      // Remove any previous celebration effects
+      document.body.classList.remove('celebrate');
+      resultElement.classList.remove('celebrate');
+      
+      // Check if input is provided
+      if (inputStr) {
+        if (isPalindrome(inputStr)) {
+          resultElement.textContent = `"${inputStr}" is a palindrome!`;
+          // Add celebration effects
+          document.body.classList.add('celebrate');
+          resultElement.classList.add('celebrate');
+        } else {
+          resultElement.textContent = `"${inputStr}" is not a palindrome.`;
+        }
+      } else {
+        resultElement.textContent = "Please enter a string.";
+      }
+    });
+  </script>
+</body>
+</html>
